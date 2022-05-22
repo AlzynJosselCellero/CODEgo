@@ -1,6 +1,8 @@
 import tkinter as tk
 
 # variables to be mainly used
+running_time = False
+hours, minutes, seconds = 0, 0, 0
 
 # start, pause, lap, and resume functions
 
@@ -9,7 +11,29 @@ import tkinter as tk
 # reset function
 
 # updating the stopwatch function
-
+def running_time_animation():
+    global hours, minutes, seconds
+    seconds += 1
+    if seconds == 60:
+        minutes += 1
+        seconds = 0
+    if minutes == 60:
+        hours += 1
+        minutes = 0
+        
+    # including zero (0) in stopwatch when hours, minutes, or seconds is single digit number
+    hours_str = f"{hours}" if hours > 9 else f"0{hours}"
+    minutes_str = f"{minutes}" if minutes > 9 else f"0{minutes}"
+    seconds_str = f"{seconds}" if seconds > 9 else f"0{seconds}"
+    
+    # configuration of stopwatch timer
+    stopwatch.config(text=hours_str + ":" + minutes_str + ":" + seconds_str)
+    
+    # after each second, call the running_time_animation function
+    global running_animation_time
+    running_animation_time = stopwatch.after(1000, running_time_animation)
+    
+    
 # creating the main window
 
 # label to display the time
