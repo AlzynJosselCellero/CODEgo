@@ -1,1 +1,27 @@
-/codes
+import tkinter as tk
+
+# variables to be mainly used
+
+# start, pause, lap, and resume functions
+
+# pause function
+
+# resume function 
+
+# reset function
+
+# lap function
+
+# label for lap function
+
+# updating the stopwatch function
+
+# creating the main window
+
+# label to display the time
+
+# creating start, pause, reset, quit buttons
+
+# placing start, pause, reset, quit buttons
+
+# run app again
