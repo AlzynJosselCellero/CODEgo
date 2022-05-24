@@ -5,6 +5,7 @@ running_time = False
 hours, minutes, seconds = 0, 0, 0
 
 # start, pause, lap, and resume functions
+# start function
 
 # resume function 
 
