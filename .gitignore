@@ -37,6 +37,10 @@ def running_time_animation():
     
 # creating the main window
 
+root = tk.Tk()
+root.geometry("900x250")
+root.title("Stopwatch")
+
 # label to display the time
 
 # creating start, pause, reset, quit buttons
@@ -44,3 +48,5 @@ def running_time_animation():
 # placing start, pause, reset, quit buttons
 
 # run app again
+root.mainloop()
+
