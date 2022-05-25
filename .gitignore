@@ -36,16 +36,23 @@ def running_time_animation():
     
     
 # creating the main window
-
 root = tk.Tk()
 root.geometry("900x250")
 root.title("Stopwatch")
 
 # label to display the time
+stopwatch = tk.Label(text="00:00:00", font=("Arial", 80))
+stopwatch.pack()
 
 # creating start, pause, reset, quit buttons
+start_button = tk.Button(text="start", font=("Arial", 20, "bold"), command=)
+reset_button = tk.Button(text="reset", font=("Arial", 20, "bold"), command=)
+quit_button = tk.Button(text="quit", font=("Arial", 20, "bold"), command=)
 
 # placing start, pause, reset, quit buttons
+start_button.place(x=0,y=120,width=300, height=100)
+reset_button.place(x=300,y=120,width=300, height=100)
+quit_button.place(x=600,y=120,width=300, height=100)
 
 # run app again
 root.mainloop()
