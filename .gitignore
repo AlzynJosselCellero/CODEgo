@@ -9,14 +9,14 @@ hours, minutes, seconds = 0, 0, 0
 def start():
     global running
     if not running:
-        update()
+        running_time_animation()
         running = True
         
 # resume function 
 def resume():
     global running
     if not running:
-        update()
+        running_time_animation()
         running = True
         
 # reset function
@@ -24,7 +24,7 @@ def reset():
     global running
     if running:
         # cancelling updating of time using after_cancel()
-        stopwatch.after_cancel(update_time)
+        stopwatch.after_cancel(running_animation_time)
         running = False
     # set variables back to zero
     global hours, minutes, seconds
