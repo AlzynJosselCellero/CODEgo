@@ -3,6 +3,8 @@ import tkinter as tk
 # variables to be mainly used
 running_time = False
 hours, minutes, seconds = 0, 0, 0
+i = 0
+j = 0
 
 # start, pause, lap, and resume functions
 # start function
@@ -31,6 +33,23 @@ def reset():
     hours, minutes, seconds = 0, 0, 0
     # set label back to zero
     stopwatch.config(text="00:00:00")
+    
+# lap function
+def lap():
+    global hours, minutes, seconds, i, j
+    if i<9:
+        lap_label ((str(hours).zfill(2)+ ":" + str(minutes).zfill(2) + ":" + str(seconds).zfill(2)), 20+(100*i), 400+(j*50))
+    else:
+        j+=1
+        i=0
+        lap_label ((str(hours).zfill(2) + ":" + str(minutes).zfill(2) + ":" + str(seconds).zfill(2)), 20+(100*i), 400+(j*50))
+    i+=1
+
+# label for lap function
+def lap_label(text,_x,_y):
+    global label
+    label = tk.Label(text=text, fg="black", bg="white", font=("Arial",8,"bold"))
+    label.place(x=_x, y=235 , width=50, height=30)
     
 # updating the stopwatch function
 def running_time_animation():
