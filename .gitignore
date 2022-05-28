@@ -7,25 +7,25 @@ hours, minutes, seconds = 0, 0, 0
 # start, pause, lap, and resume functions
 # start function
 def start():
-    global running
-    if not running:
+    global running_time
+    if not running_time:
         running_time_animation()
-        running = True
+        running_time = True
         
 # resume function 
 def resume():
-    global running
-    if not running:
+    global running_time
+    if not running_time:
         running_time_animation()
-        running = True
+        running_time = True
         
 # reset function
 def reset():
-    global running
-    if running:
+    global running_time
+    if running_time:
         # cancelling updating of time using after_cancel()
         stopwatch.after_cancel(running_animation_time)
-        running = False
+        running_time = False
     # set variables back to zero
     global hours, minutes, seconds
     hours, minutes, seconds = 0, 0, 0
