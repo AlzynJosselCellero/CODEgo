@@ -6,11 +6,32 @@ hours, minutes, seconds = 0, 0, 0
 
 # start, pause, lap, and resume functions
 # start function
-
+def start():
+    global running
+    if not running:
+        update()
+        running = True
+        
 # resume function 
-
+def resume():
+    global running
+    if not running:
+        update()
+        running = True
+        
 # reset function
-
+def reset():
+    global running
+    if running:
+        # cancelling updating of time using after_cancel()
+        stopwatch.after_cancel(update_time)
+        running = False
+    # set variables back to zero
+    global hours, minutes, seconds
+    hours, minutes, seconds = 0, 0, 0
+    # set label back to zero
+    stopwatch.config(text="00:00:00")
+    
 # updating the stopwatch function
 def running_time_animation():
     global hours, minutes, seconds
@@ -45,9 +66,9 @@ stopwatch = tk.Label(text="00:00:00", font=("Arial", 80))
 stopwatch.pack()
 
 # creating start, pause, reset, quit buttons
-start_button = tk.Button(text="start", font=("Arial", 20, "bold"), command=)
-reset_button = tk.Button(text="reset", font=("Arial", 20, "bold"), command=)
-quit_button = tk.Button(text="quit", font=("Arial", 20, "bold"), command=)
+start_button = tk.Button(text="start", font=("Arial", 20, "bold"), command=start)
+reset_button = tk.Button(text="reset", font=("Arial", 20, "bold"), command=reset)
+quit_button = tk.Button(text="quit", font=("Arial", 20, "bold"), command=quit)
 
 # placing start, pause, reset, quit buttons
 start_button.place(x=0,y=120,width=300, height=100)
