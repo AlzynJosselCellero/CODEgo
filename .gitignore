@@ -13,14 +13,36 @@ def start():
     if not running_time:
         running_time_animation()
         running_time = True
-        
+    # if start button is clicked, then the start button will be replaced into pause button
+    start_button.place_forget()
+    pause_button.place(x=415,y=120, width=190, height=100)
+    lap_button.place(x=215,y=120, width=190, height=100)
+
+# pause function
+def pause():
+    global running_time
+    if running_time:
+        # cancel updating of time using after_cancel()
+        stopwatch.after_cancel(running_animation_time)
+        running_time = False
+    # if pause button is clicked, then the pause button will be replaced into resume button
+    pause_button.place_forget()
+    lap_button.place_forget()
+    resume_button.place(x=415,y=120, width=190, height=100)
+    reset_button.place(x=215,y=120, width=190, height=100)
+    
 # resume function 
 def resume():
     global running_time
     if not running_time:
         running_time_animation()
         running_time = True
-        
+    # if resume button is clicked, then the resume button will be replaced into pause button
+    resume_button.place_forget()
+    reset_button.place_forget()
+    pause_button.place(x=415,y=120, width=190, height=100)
+    lap_button.place(x=215,y=120, width=190, height=100)
+    
 # reset function
 def reset():
     global running_time
@@ -33,6 +55,17 @@ def reset():
     hours, minutes, seconds = 0, 0, 0
     # set label back to zero
     stopwatch.config(text="00:00:00")
+    hours, minutes, seconds = 0, 0, 0
+    i = 0
+    j = 0
+    wig=root.winfo_children()
+    for b in wig:
+        b.place_forget()
+        resume_button.place_forget()
+        pause_button.place_forget()
+        label_frame.place_forget()
+        reset_button.place_forget()
+    start_button.place(x=315,y=120, width=190, height=100)
     
 # lap function
 def lap():
@@ -48,7 +81,8 @@ def lap():
 # label for lap function
 def lap_label(text,_x,_y):
     global label
-    label = tk.Label(text=text, fg="black", bg="white", font=("Arial",8,"bold"))
+    label = tk.Label(text=text, fg="black", bg="white", font=("Arial",10,"bold"))
+    label_frame.place(x = 15, y = 230, width=785, height=40)
     label.place(x=_x, y=235 , width=50, height=30)
     
 # updating the stopwatch function
@@ -77,22 +111,26 @@ def running_time_animation():
     
 # creating the main window
 root = tk.Tk()
-root.geometry("900x250")
+root.configure(bg= "burlywood2")
+root.geometry("820x280")
 root.title("Stopwatch")
 
+# creating the frame for the lap time labels
+label_frame = tk.Frame(root, bg="white")
+
 # label to display the time
-stopwatch = tk.Label(text="00:00:00", font=("Arial", 80))
+stopwatch = tk.Label(bg= "burlywood2", text="00:00:00", font=("Arial", 80))
 stopwatch.pack()
 
 # creating start, pause, reset, quit buttons
-start_button = tk.Button(text="start", font=("Arial", 20, "bold"), command=start)
-reset_button = tk.Button(text="reset", font=("Arial", 20, "bold"), command=reset)
-lap_button = tk.Button(text="lap", font=("Arial", 20, "bold"), command=lap)
+start_button = tk.Button(bg= "burlywood4", text="start", borderwidth=0, font=("Arial", 20, "bold"), command=start)
+reset_button = tk.Button(bg= "burlywood4", text="reset", borderwidth=0, font=("Arial", 20, "bold"), command=reset)
+lap_button = tk.Button(bg= "burlywood4", text="lap", borderwidth=0, font=("Arial", 20, "bold"), command=lap)
+pause_button = tk.Button(bg= "burlywood4", text="pause", borderwidth=0, font=("Arial", 20, "bold"), command=pause)
+resume_button = tk.Button(bg= "burlywood4", text="resume", borderwidth=0, font=("Arial", 20, "bold"), command=resume)
 
 # placing start, pause, reset, quit buttons
-start_button.place(x=0,y=120,width=300, height=100)
-reset_button.place(x=300,y=120,width=300, height=100)
-lap_button.place(x=600,y=120,width=300, height=100)
+start_button.place(x=315,y=120, width=190, height=100)
 
 # run app again
 root.mainloop()
