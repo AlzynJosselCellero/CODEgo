@@ -87,12 +87,12 @@ stopwatch.pack()
 # creating start, pause, reset, quit buttons
 start_button = tk.Button(text="start", font=("Arial", 20, "bold"), command=start)
 reset_button = tk.Button(text="reset", font=("Arial", 20, "bold"), command=reset)
-quit_button = tk.Button(text="quit", font=("Arial", 20, "bold"), command=quit)
+lap_button = tk.Button(text="lap", font=("Arial", 20, "bold"), command=lap)
 
 # placing start, pause, reset, quit buttons
 start_button.place(x=0,y=120,width=300, height=100)
 reset_button.place(x=300,y=120,width=300, height=100)
-quit_button.place(x=600,y=120,width=300, height=100)
+lap_button.place(x=600,y=120,width=300, height=100)
 
 # run app again
 root.mainloop()
