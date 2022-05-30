@@ -54,7 +54,7 @@ def reset():
     global hours, minutes, seconds, milliseconds
     hours, minutes, seconds, milliseconds = 0, 0, 0, 0
     # set label back to zero
-    stopwatch.config(text="00:00:00.00")
+    stopwatch.config(text="00:00:00")
     hours, minutes, seconds, milliseconds = 0, 0, 0, 0
     i = 0
     j = 0
@@ -83,7 +83,7 @@ def lap_label(text,_x,_y):
     global label
     label = tk.Label(text=text, fg="black", bg="white", font=("Arial",10,"bold"))
     label_frame.place(x = 15, y = 230, width=785, height=40)
-    label.place(x=_x, y=235 , width=50, height=30)
+    label.place(x=_x, y=235 , width=70, height=30)
     
 # updating the stopwatch function
 def running_time_animation():
@@ -121,7 +121,7 @@ root.title("Stopwatch")
 label_frame = tk.Frame(root, bg="white")
 
 # label to display the time
-stopwatch = tk.Label(bg= "burlywood2", text="00:00:00.00", font=("Arial", 80))
+stopwatch = tk.Label(bg= "burlywood2", text="00:00:00", font=("Arial", 80))
 stopwatch.pack()
 
 # creating start, pause, reset, quit buttons
