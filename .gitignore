@@ -2,7 +2,7 @@ import tkinter as tk
 
 # variables to be mainly used
 running_time = False
-hours, minutes, seconds = 0, 0, 0
+hours, minutes, seconds, milliseconds = 0, 0, 0, 0
 i = 0
 j = 0
 
@@ -51,11 +51,11 @@ def reset():
         stopwatch.after_cancel(running_animation_time)
         running_time = False
     # set variables back to zero
-    global hours, minutes, seconds
-    hours, minutes, seconds = 0, 0, 0
+    global hours, minutes, seconds, milliseconds
+    hours, minutes, seconds, milliseconds = 0, 0, 0, 0
     # set label back to zero
     stopwatch.config(text="00:00:00")
-    hours, minutes, seconds = 0, 0, 0
+    hours, minutes, seconds, milliseconds = 0, 0, 0, 0
     i = 0
     j = 0
     wig=root.winfo_children()
@@ -70,12 +70,12 @@ def reset():
 # lap function
 def lap():
     global hours, minutes, seconds, i, j
-    if i<9:
-        lap_label ((str(hours).zfill(2)+ ":" + str(minutes).zfill(2) + ":" + str(seconds).zfill(2)), 20+(100*i), 400+(j*50))
+    if i<8:
+        lap_label ((str(hours).zfill(2)+ ":" + str(minutes).zfill(2) + ":" + str(seconds).zfill(2)) + "." + str(milliseconds).zfill(2), 20+(100*i), 400+(j*50))
     else:
         j+=1
         i=0
-        lap_label ((str(hours).zfill(2) + ":" + str(minutes).zfill(2) + ":" + str(seconds).zfill(2)), 20+(100*i), 400+(j*50))
+        lap_label ((str(hours).zfill(2) + ":" + str(minutes).zfill(2) + ":" + str(seconds).zfill(2)) + "." + str(milliseconds).zfill(2), 20+(100*i), 400+(j*50))
     i+=1
 
 # label for lap function
@@ -83,30 +83,32 @@ def lap_label(text,_x,_y):
     global label
     label = tk.Label(text=text, fg="black", bg="white", font=("Arial",10,"bold"))
     label_frame.place(x = 15, y = 230, width=785, height=40)
-    label.place(x=_x, y=235 , width=50, height=30)
+    label.place(x=_x, y=235 , width=70, height=30)
     
 # updating the stopwatch function
 def running_time_animation():
-    global hours, minutes, seconds
-    seconds += 1
+    global hours, minutes, seconds, milliseconds
+    milliseconds += 1
+    if milliseconds == 100:
+        seconds += 1
+        milliseconds = 0
     if seconds == 60:
         minutes += 1
         seconds = 0
     if minutes == 60:
         hours += 1
         minutes = 0
-        
     # including zero (0) in stopwatch when hours, minutes, or seconds is single digit number
     hours_str = f"{hours}" if hours > 9 else f"0{hours}"
     minutes_str = f"{minutes}" if minutes > 9 else f"0{minutes}"
     seconds_str = f"{seconds}" if seconds > 9 else f"0{seconds}"
+    milliseconds_str = f"{milliseconds}" if milliseconds > 9 else f"0{milliseconds}"
+    # running_time_animation timer configuration updating after each second
+    stopwatch.config(text=hours_str + ":" + minutes_str + ":" + seconds_str + "." + milliseconds_str)
     
-    # configuration of stopwatch timer
-    stopwatch.config(text=hours_str + ":" + minutes_str + ":" + seconds_str)
-    
-    # after each second, call the running_time_animation function
+    # after each second (1000 ms), call the running_time_animation function
     global running_animation_time
-    running_animation_time = stopwatch.after(1000, running_time_animation)
+    running_animation_time = stopwatch.after(10, running_time_animation)
     
     
 # creating the main window
