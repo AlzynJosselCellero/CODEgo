@@ -115,7 +115,7 @@ def running_time_animation():
 root = tk.Tk()
 root.configure(bg= "burlywood2")
 root.geometry("820x280")
-root.title("Stopwatch")
+root.title("CODEgo Stopwatch")
 
 # creating the frame for the lap time labels
 label_frame = tk.Frame(root, bg="white")
