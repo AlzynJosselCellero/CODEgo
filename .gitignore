@@ -13,7 +13,7 @@ def start():
     if not running_time:
         running_time_animation()
         running_time = True
-    # if start button is clicked, then the start button will be replaced into pause button
+    # if start button is clicked, then the start button will be replaced into pause and lap button
     start_button.place_forget()
     pause_button.place(x=415,y=120, width=190, height=100)
     lap_button.place(x=215,y=120, width=190, height=100)
@@ -25,7 +25,7 @@ def pause():
         # cancel updating of time using after_cancel()
         stopwatch.after_cancel(running_animation_time)
         running_time = False
-    # if pause button is clicked, then the pause button will be replaced into resume button
+    # if pause button is clicked, then the pause button will be replaced into resume and reset button
     pause_button.place_forget()
     lap_button.place_forget()
     resume_button.place(x=415,y=120, width=190, height=100)
@@ -37,7 +37,7 @@ def resume():
     if not running_time:
         running_time_animation()
         running_time = True
-    # if resume button is clicked, then the resume button will be replaced into pause button
+    # if resume button is clicked, then the resume button will be replaced into pause and lap button
     resume_button.place_forget()
     reset_button.place_forget()
     pause_button.place(x=415,y=120, width=190, height=100)
@@ -50,14 +50,15 @@ def reset():
         # cancelling updating of time using after_cancel()
         stopwatch.after_cancel(running_animation_time)
         running_time = False
+        
     # set variables back to zero
     global hours, minutes, seconds, milliseconds
     hours, minutes, seconds, milliseconds = 0, 0, 0, 0
+    
     # set label back to zero
     stopwatch.config(text="00:00:00")
-    hours, minutes, seconds, milliseconds = 0, 0, 0, 0
-    i = 0
-    j = 0
+    
+    # if reset button is clicked, then the resume button or pause button will be replaced into start button
     wig=root.winfo_children()
     for b in wig:
         b.place_forget()
@@ -99,12 +100,13 @@ def running_time_animation():
     minutes_str = f"{minutes}" if minutes > 9 else f"0{minutes}"
     seconds_str = f"{seconds}" if seconds > 9 else f"0{seconds}"
     milliseconds_str = f"{milliseconds}" if milliseconds > 9 else f"0{milliseconds}"
+    
     # running_time_animation timer configuration updating after each millisecond
     stopwatch.config(text=hours_str + ":" + minutes_str + ":" + seconds_str + "." + milliseconds_str)
     
     # call the running_time_animation function
     global running_animation_time
-    running_animation_time = stopwatch.after(10, running_time_animation)
+    running_animation_time = stopwatch.after(9, running_time_animation)
     
     
 # creating the main window
